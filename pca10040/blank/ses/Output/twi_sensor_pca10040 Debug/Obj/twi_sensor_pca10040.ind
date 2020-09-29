@@ -18,6 +18,7 @@
 "Output/twi_sensor_pca10040 Debug/Obj/nrf_memobj.o"
 "Output/twi_sensor_pca10040 Debug/Obj/nrf_ringbuf.o"
 "Output/twi_sensor_pca10040 Debug/Obj/nrf_strerror.o"
+"Output/twi_sensor_pca10040 Debug/Obj/app_scheduler.o"
 "Output/twi_sensor_pca10040 Debug/Obj/nrf_drv_twi.o"
 "Output/twi_sensor_pca10040 Debug/Obj/nrf_drv_uart.o"
 "Output/twi_sensor_pca10040 Debug/Obj/nrfx_atomic.o"

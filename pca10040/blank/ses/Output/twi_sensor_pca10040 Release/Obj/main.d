@@ -71,4 +71,9 @@ Output/twi_sensor_pca10040\ Release/Obj/main.o: \
  c:\sdk16\components\libraries\balloc\nrf_balloc.h \
  c:\sdk16\components\libraries\log\nrf_log_default_backends.h \
  ../../../sensor/vl53l1x_api.h ../../../sensor/vl53l1_platform.h \
- ../../../sensor/vl53l1_types.h ../../../sensor/vl53l1_platform.h
+ ../../../sensor/vl53l1_types.h ../../../sensor/vl53l1_platform.h \
+ c:\sdk16\modules\nrfx\drivers\include\nrfx_gpiote.h \
+ c:\sdk16\modules\nrfx\hal\nrf_gpiote.h \
+ c:\sdk16\modules\nrfx\hal\nrf_gpio.h \
+ c:\sdk16\integration\nrfx\legacy\nrf_drv_gpiote.h \
+ c:\sdk16\components\libraries\scheduler\app_scheduler.h

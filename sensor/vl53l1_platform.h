@@ -19,6 +19,8 @@ typedef struct {
 
 typedef VL53L1_Dev_t *VL53L1_DEV;
 
+void twi_init (uint32_t scl, uint32_t sda);
+
 /** @brief VL53L1_WriteMulti() definition.\n
  * To be implemented by the developer
  */
@@ -38,14 +40,14 @@ int8_t VL53L1_ReadMulti(
 /** @brief VL53L1_WrByte() definition.\n
  * To be implemented by the developer
  */
-int8_t VL53L1_WrByte(
+uint32_t VL53L1_WrByte(
 		uint16_t dev,
 		uint16_t      index,
 		uint8_t       data);
 /** @brief VL53L1_WrWord() definition.\n
  * To be implemented by the developer
  */
-int8_t VL53L1_WrWord(
+uint32_t VL53L1_WrWord(
 		uint16_t dev,
 		uint16_t      index,
 		uint16_t      data);
@@ -59,14 +61,14 @@ int8_t VL53L1_WrDWord(
 /** @brief VL53L1_RdByte() definition.\n
  * To be implemented by the developer
  */
-int8_t VL53L1_RdByte(
+uint32_t VL53L1_RdByte(
 		uint16_t dev,
 		uint16_t      index,
 		uint8_t      *pdata);
 /** @brief VL53L1_RdWord() definition.\n
  * To be implemented by the developer
  */
-int8_t VL53L1_RdWord(
+uint32_t VL53L1_RdWord(
 		uint16_t dev,
 		uint16_t      index,
 		uint16_t     *pdata);

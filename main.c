@@ -14,142 +14,86 @@
 #include "vl53l1_platform.h"
 #include "nrfx_gpiote.h"
 #include "nrf_drv_gpiote.h"
+#include "app_scheduler.h"
 
-/* TWI instance ID. */
-#define TWI_INSTANCE_ID     0
 
-/* Default VL53L1X Address (7 bytes are used)*/
+/* Default VL53L1X Address (7 bits are used)*/
 #define VL53L1X_ADDR          (0x52U >> 1)
 
-/* Indicates if operation on TWI has ended. */
-static volatile bool m_xfer_done = false;
-
-/* TWI instance. */
-static nrf_drv_twi_t m_twi = NRF_DRV_TWI_INSTANCE(TWI_INSTANCE_ID);
-
-/* Pointer used to reference to TWI instance*/
-extern nrf_drv_twi_t *p_twi = &m_twi;
+// Scheduler settings
+#define SCHED_MAX_EVENT_DATA_SIZE   sizeof(nrfx_gpiote_pin_t)
+#define SCHED_QUEUE_SIZE            10
 
 
-/**
- * @brief UART initialization.
- */
-void twi_init (void)
+void sensor_setup(void)
 {
-    ret_code_t err_code;
+    VL53L1X_ERROR status;
+    uint16_t      temp16;
+    VL53L1X_GetSensorId(VL53L1X_ADDR, &temp16);
+    NRF_LOG_INFO("[Module type][Model ID] - %x", temp16);
 
-    const nrf_drv_twi_config_t twi_lm75b_config = {
-       .scl                = ARDUINO_SCL_PIN,       //27
-       .sda                = ARDUINO_SDA_PIN,       //26yy
-       .frequency          = NRF_DRV_TWI_FREQ_100K,
-       .interrupt_priority = APP_IRQ_PRIORITY_HIGH,
-       .clear_bus_init     = false
-    };
+    /*Mandatory function to init sensor*/
+    status  = VL53L1X_SensorInit(VL53L1X_ADDR);
+    /*Optional function to sett distance threshold*/
+    status  = VL53L1X_SetDistanceThreshold(VL53L1X_ADDR, 100, 100, 0, 1);
+    /*Mandatory function to start ranging operation*/
+    status  = VL53L1X_StartRanging(VL53L1X_ADDR);
+    NRF_LOG_INFO("Started ranging");
+    NRF_LOG_FLUSH();
+}
 
-    err_code = nrf_drv_twi_init(&m_twi, &twi_lm75b_config, NULL, NULL);
-    APP_ERROR_CHECK(err_code);
+void in_event_handler(nrfx_gpiote_pin_t pin, nrf_gpiote_polarity_t action);
+nrfx_gpiote_in_config_t config = NRFX_GPIOTE_CONFIG_IN_SENSE_LOTOHI(false);
 
-    nrf_drv_twi_enable(&m_twi);
+void gpiote_init(void)
+{
+    nrfx_gpiote_init();
+    nrfx_gpiote_in_init(12, &config, in_event_handler);
+    nrfx_gpiote_in_event_enable(12, true);
 }
 
 uint8_t       sensorState = 0;
 int           status      = 0;
-uint8_t       I2CBuffer[256];
-uint16_t      index       = 0x00E5;  //BootState index
-nrfx_gpiote_in_config_t config = NRFX_GPIOTE_CONFIG_IN_SENSE_LOTOHI(false);
+uint32_t      int_cnt     = 0;
+VL53L1X_ERROR sensor_err;
 
-uint8_t flg=0;
+void s_in_evt_handler(void * p_event_data, uint16_t event_size)
+{
+    NRF_LOG_INFO("TRIGGERED %d",int_cnt);
+    int_cnt++;
+    sensor_err = VL53L1X_ClearInterrupt(VL53L1X_ADDR);
+    APP_ERROR_CHECK(sensor_err);
+}
 
 void in_event_handler(nrfx_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
-    flg=1;
+    app_sched_event_put(NULL, 0, s_in_evt_handler);
 }
 
 int main(void)
 {
-    ret_code_t err_code;
+    //init and setup - GPIOTE: LOTOHI Transition on pin no.12
+    gpiote_init();
 
-    //init and setup - GPIOTE: Transition on pin no.12
-    nrfx_gpiote_init();
-    nrfx_gpiote_in_init(12, &config, in_event_handler);
-    nrfx_gpiote_in_event_enable(12, true);
-
-    bsp_board_init(BSP_INIT_LEDS);
     APP_ERROR_CHECK(NRF_LOG_INIT(NULL));
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 
-    NRF_LOG_INFO("\r\nTWI sensor example started.");
-    NRF_LOG_FLUSH();
-    twi_init();
+    twi_init(ARDUINO_SCL_PIN, ARDUINO_SDA_PIN);
 
-    I2CBuffer[0] = index>>8;    
-    I2CBuffer[1] = index&0xFF;
-    
+    APP_SCHED_INIT(SCHED_MAX_EVENT_DATA_SIZE, SCHED_QUEUE_SIZE);
 
-    bsp_board_led_on(0);    //Just an indicator
+    //Check if device has booted
     while(sensorState==0)
-    {//Check if device has booted
-        status=VL53L1X_BootState(0x52,&sensorState);
-    }
+        VL53L1X_BootState(VL53L1X_ADDR,&sensorState);
+
     NRF_LOG_INFO("Chip booted");
     NRF_LOG_FLUSH();
-
-    //Testing manual reading from sensor (not using driver functions)
-    //--------------------------------------------------------------//
-    index = 0x010F;
-    I2CBuffer[0] = index>>8;
-    I2CBuffer[1] = index&0xFF;
-    err_code = nrf_drv_twi_tx(&m_twi, VL53L1X_ADDR, I2CBuffer, 2, false);
-    APP_ERROR_CHECK(err_code);
-    err_code= nrf_drv_twi_rx(&m_twi, VL53L1X_ADDR, &sensorState, 1);
-    APP_ERROR_CHECK(err_code);
-
-    NRF_LOG_INFO("model id: %x",sensorState);
-
-    index = 0x0110;
-    I2CBuffer[0] = index>>8;
-    I2CBuffer[1] = index&0xFF;
-    err_code = nrf_drv_twi_tx(&m_twi, VL53L1X_ADDR, I2CBuffer, 2, false);
-    APP_ERROR_CHECK(err_code);
-    err_code= nrf_drv_twi_rx(&m_twi, VL53L1X_ADDR, &sensorState, 1);
-    APP_ERROR_CHECK(err_code);
-
-    NRF_LOG_INFO("module type: %x",sensorState);
-    NRF_LOG_FLUSH();
-    //--------------------------------------------------------------//
     
-    /*Mandatory function to init sensor*/
-    VL53L1X_SensorInit(VL53L1X_ADDR);
-    /*Optional function to sett distance threshold*/
-    VL53L1X_SetDistanceThreshold(VL53L1X_ADDR, 100, 100, 0, 1);
-    /*Mandatory function to start ranging operation*/
-    VL53L1X_StartRanging(VL53L1X_ADDR);
-    NRF_LOG_INFO("Started ranging");
-    NRF_LOG_FLUSH();
-
-    uint8_t     isdatardy;
-    uint16_t    distance;
-    uint32_t    int_cnt   = 0;
-
+    sensor_setup();
+    
     while (true)
     {
-//        nrf_delay_ms(500);//delay used in polling mode
-          ////Polling for data
-//        VL53L1X_CheckForDataReady(VL53L1X_ADDR, &isdatardy);
-//        if(isdatardy == 1)
-//        {   //Reading ranging data
-//            VL53L1X_GetDistance(VL53L1X_ADDR,&distance);
-//        }
-        //Clearing interrupt - if needed can be moved under following if statement
-        VL53L1X_ClearInterrupt(VL53L1X_ADDR);
-        if(flg==1)
-        {
-            NRF_LOG_INFO("TRIGGERED %d",int_cnt);
-            int_cnt++;
-            flg=0;
-        }
-
-//        NRF_LOG_INFO("DISTANCE: %d",distance);
+        app_sched_execute();
         NRF_LOG_FLUSH();
     }
 }
