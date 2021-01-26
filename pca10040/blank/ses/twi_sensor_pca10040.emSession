@@ -25,7 +25,6 @@
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;Application"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;Board Definition"/>
-  <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;nRF_Drivers"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;nRF_Libraries"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;Sensor"/>
  </Project>
@@ -49,8 +48,8 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Twice a Second">
-   <Watchpoint expression="dev" name="dev" radix="-1" linenumber="129" filename="../../../main.c"/>
-   <Watchpoint expression="er" name="er" radix="16" linenumber="129" filename="../../../main.c"/>
+   <Watchpoint expression="dev" name="dev" radix="-1" linenumber="146" filename="../../../main.c"/>
+   <Watchpoint expression="er" name="er" radix="16" linenumber="146" filename="../../../main.c"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -63,13 +62,15 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="62" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="111" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="224" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../sensor/VL53L1X_api.c" selected="0" top="224" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="62" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../sensor/vl53l1_platform.h" selected="0" top="41" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="238" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../sensor/VL53L1X_api.h" selected="0" top="225" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="145" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/boards/pca10040.h" selected="0" top="136" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="120" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../sensor/vl53l1_platform.c" selected="0" top="102" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="435" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/hal/nrf_twim.h" selected="0" top="426" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="14" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="0" top="24" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="224" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/VL53L1X_api.c" selected="0" top="224" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="62" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/vl53l1_platform.h" selected="0" top="41" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="238" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/VL53L1X_api.h" selected="0" top="225" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="145" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/boards/pca10040.h" selected="0" top="136" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="120" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/vl53l1_platform.c" selected="0" top="102" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="435" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../modules/nrfx/hal/nrf_twim.h" selected="0" top="426" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/app_mpu.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="13" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/main.c" useBinaryEdit="0" left="0" path="../../../sensor/app_mpu.h" selected="1" top="0" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="twi_sensor_pca10040" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/SDK16/examples/peripheral/twi_sensor/sensor" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="twi_sensor_pca10040" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
