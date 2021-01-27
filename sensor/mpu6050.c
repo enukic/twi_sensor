@@ -58,8 +58,6 @@
 /* TWI instance ID. */
 #define TWI_INSTANCE_ID     0
 
-//#define TOF_SCL_PIN                     NRF_GPIO_PIN_MAP(0,27)    //SCL PIN
-//#define TOF_SDA_PIN                     NRF_GPIO_PIN_MAP(0,26)    //SDA PIN
 
 static const uint8_t expected_who_am_i = 0x68U; // !< Expected value to get from WHO_AM_I register.
 static uint8_t       m_device_address;          // !< Device address in bits [7:1]
@@ -94,9 +92,14 @@ bool mpu6050_init(uint8_t device_address)
 
     // Do a reset on signal paths
     uint8_t reset_value = 0x04U | 0x02U | 0x01U; // Resets gyro, accelerometer and temperature sensor signal paths.
-    transfer_succeeded &= mpu6050_register_write(ADDRESS_SIGNAL_PATH_RESET, reset_value);
+    transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 128);
+    transfer_succeeded &= mpu6050_register_write(ADDRESS_SIGNAL_PATH_RESET, 7);
     transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 1);
-    transfer_succeeded &= mpu6050_register_write(MPU_REG_GYRO_CONFIG, (24 | 128));
+    //transfer_succeeded &= mpu6050_register_write(MPU_REG_GYRO_CONFIG, (24 | 128));
+
+    //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (24 | 32));
+    //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, 64);
+    //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, 128);
 
     // Read and verify product ID
     transfer_succeeded &= mpu6050_verify_product_id();
@@ -108,15 +111,30 @@ bool mpu6050_verify_product_id(void)
 {
     uint8_t who_am_i;
 
-    uint8_t raw_values[6];
-    NRF_LOG_INFO("\r\n INIT: %x",raw_values);
-    
-    mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,raw_values,6);
-    NRF_LOG_INFO("\r\nDATA: %x",raw_values);
-    uint8_t read_v;
-    mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_v,2);
-    NRF_LOG_INFO("\r\nDATA: %x",read_v);
-        NRF_LOG_FLUSH();
+
+    //uint8_t read_x, read_y;
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+    //int16_t tmpx = ((int16_t)read_x << 8) | read_y;
+    //NRF_LOG_INFO("Before: %d",tmpx);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+    //tmpx = ((int16_t)read_x << 8) | read_y;
+    //NRF_LOG_INFO("Before: %d",tmpx);
+
+    //mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (1<<5));
+    mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (3<<3));
+
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+    //tmpx = ((int16_t)read_x << 8) | read_y;
+    //NRF_LOG_INFO("After: %d",tmpx);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+    //tmpx = ((int16_t)read_x << 8) | read_y;
+    //NRF_LOG_INFO("After: %d",tmpx);
+
+    //    NRF_LOG_FLUSH();
 
 
     if (mpu6050_register_read(ADDRESS_WHO_AM_I, &who_am_i, 1))
