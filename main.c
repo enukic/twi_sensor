@@ -13,12 +13,16 @@
 //#include "vl53l1x_api.h"
 //#include "vl53l1_platform.h"
 #include "mpu6050.h"
+#include "mpu60x0_register_map.h"
 
 /* TWI instance ID. */
 #define TWI_INSTANCE_ID     0
 
 /* Default VL53L1X Address (7 bytes are used)*/
 #define VL53L1X_ADDR          (0x52U >> 1)
+
+#define TOF_SCL_PIN                     NRF_GPIO_PIN_MAP(0,27)    //SCL PIN
+#define TOF_SDA_PIN                     NRF_GPIO_PIN_MAP(0,26)    //SDA PIN
 
 /* Indicates if operation on TWI has ended. */
 static volatile bool m_xfer_done = false;
@@ -81,7 +85,7 @@ int main(void)
 
     NRF_LOG_INFO("\r\nTWI sensor example started.");
     NRF_LOG_FLUSH();
-    //twi_init();
+    twi_init(TOF_SCL_PIN, TOF_SDA_PIN);
 
     I2CBuffer[0] = index>>8;
     I2CBuffer[1] = index&0xFF;
@@ -90,62 +94,43 @@ int main(void)
     mpu6050_init(d_add);
     bsp_board_led_on(0);    //Just an indicator
 
-    //while(sensorState==0)
-    //{//Check if device has booted
-    //    status=VL53L1X_BootState(0x52,&sensorState);
-    //}
-    //NRF_LOG_INFO("Chip booted");
-    //NRF_LOG_FLUSH();
-
-    ////Testing manual reading from sensor (not using driver functions)
-    //index = 0x010F;
-    //I2CBuffer[0] = index>>8;
-    //I2CBuffer[1] = index&0xFF;
-    //ret_code_t err_code = nrf_drv_twi_tx(&m_twi, VL53L1X_ADDR, I2CBuffer, 2, false);
-    //APP_ERROR_CHECK(err_code);
-    //err_code= nrf_drv_twi_rx(&m_twi, VL53L1X_ADDR, &sensorState, 1);
-    //APP_ERROR_CHECK(err_code);
-
-    //NRF_LOG_INFO("model id: %x",sensorState);
-    //NRF_LOG_FLUSH();
-
-    //index = 0x0110;
-    //I2CBuffer[0] = index>>8;
-    //I2CBuffer[1] = index&0xFF;
-    //err_code = nrf_drv_twi_tx(&m_twi, VL53L1X_ADDR, I2CBuffer, 2, false);
-    //APP_ERROR_CHECK(err_code);
-    //err_code= nrf_drv_twi_rx(&m_twi, VL53L1X_ADDR, &sensorState, 1);
-    //APP_ERROR_CHECK(err_code);
-
-    //NRF_LOG_INFO("model id: %x",sensorState);
-    //NRF_LOG_FLUSH();
-
-    //VL53L1X_SensorInit(VL53L1X_ADDR);
-    
-    //nrf_delay_ms(50);
-    //VL53L1X_StartRanging(VL53L1X_ADDR);
-    //NRF_LOG_INFO("Started ranging");
-    //NRF_LOG_FLUSH();
-
-    //uint8_t     isdatardy;
-    //uint16_t    distance;
+    NRF_LOG_INFO("\r\nTWI sensor example init.");
+    NRF_LOG_FLUSH();
 
 
 
-
+    uint8_t raw_values[6];
+    uint32_t ret;
     while (true)
     {
-        nrf_delay_ms(200);
-        //mpu_init();
-        //VL53L1X_CheckForDataReady(VL53L1X_ADDR, &isdatardy);
-        //if(isdatardy == 1)
-        //{
-        //    VL53L1X_GetDistance(VL53L1X_ADDR,&distance);
-        //}
-        //VL53L1X_ClearInterrupt(VL53L1X_ADDR);
+        nrf_delay_ms(100);
 
-        //NRF_LOG_INFO("DISTANCE: %d",distance);
-        //NRF_LOG_FLUSH();
+        uint8_t read_x, read_y, read_z;
+        //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_x,1);
+        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,1);
+        //mpu6050_register_read(MPU_REG_ACCEL_ZOUT_L,&read_z,1);
+        //NRF_LOG_INFO("\r\n ACCEL:: %x %x %x",read_x, read_y, read_z);
+        //mpu6050_register_read(MPU_REG_WHO_AM_I,&read_y,1);
+        //NRF_LOG_INFO("\r\n WHO AM I: %x",read_y);
+        mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+        //mpu6050_register_read(MPU_REG_GYRO_YOUT_H,&read_y,2);
+        //mpu6050_register_read(MPU_REG_GYRO_ZOUT_H,&read_z,2);
+        //NRF_LOG_INFO("GYRO: %x %x %x",read_x, read_y, read_z);
+        uint16_t tmp = ((uint16_t)read_x << 8) | read_y;
+
+        NRF_LOG_INFO("GYRO: %x",tmp);
+
+        
+        //ret = mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&raw_values[0],6);
+        //APP_ERROR_CHECK(ret);
+        //NRF_LOG_INFO("\r\nDATA: %x",&raw_values);
+        //ret = mpu6050_register_read(MPU_REG_GYRO_XOUT_H,&raw_values,6);
+        //APP_ERROR_CHECK(ret);
+        //NRF_LOG_INFO("\r\nGYROA: %x",&raw_values);
+        NRF_LOG_FLUSH();
+
+
 
 
     }

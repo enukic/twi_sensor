@@ -51,6 +51,7 @@ Output/Debug/Obj/twi_sensor_pca10040/mpu6050.o: \
  c:\sdks\sdk16\modules\nrfx\hal\nrf_twim.h \
  c:\sdks\sdk16\modules\nrfx\drivers\include\nrfx_twi.h \
  c:\sdks\sdk16\modules\nrfx\hal\nrf_twi.h \
+ C:\SDKs\SDK16\examples\peripheral\twi_sensor\sensor\mpu60x0_register_map.h \
  c:\sdks\sdk16\components\libraries\log\nrf_log.h \
  c:\sdks\sdk16\components\libraries\util\sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/string.h \

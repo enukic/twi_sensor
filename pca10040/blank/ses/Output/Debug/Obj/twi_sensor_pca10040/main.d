@@ -73,4 +73,4 @@ Output/Debug/Obj/twi_sensor_pca10040/main.o: \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stdlib.h \
  c:\sdks\sdk16\components\libraries\balloc\nrf_balloc.h \
  c:\sdks\sdk16\components\libraries\log\nrf_log_default_backends.h \
- ../../../sensor/mpu6050.h
+ ../../../sensor/mpu6050.h ../../../sensor/mpu60x0_register_map.h
