@@ -26,6 +26,7 @@
 "Output/Debug/Obj/twi_sensor_pca10040/nrfx_twim.o"
 "Output/Debug/Obj/twi_sensor_pca10040/nrfx_uart.o"
 "Output/Debug/Obj/twi_sensor_pca10040/nrfx_uarte.o"
+"Output/Debug/Obj/twi_sensor_pca10040/nrfx_gpiote.o"
 "Output/Debug/Obj/twi_sensor_pca10040/main.o"
 "Output/Debug/Obj/twi_sensor_pca10040/SEGGER_RTT.o"
 "Output/Debug/Obj/twi_sensor_pca10040/SEGGER_RTT_Syscalls_SES.o"

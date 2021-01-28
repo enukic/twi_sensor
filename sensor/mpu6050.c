@@ -124,6 +124,8 @@ bool mpu6050_verify_product_id(void)
 
     //mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (1<<5));
     mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (3<<3));
+    mpu6050_register_write(MPU_REG_INT_ENABLE, 1);
+    mpu6050_register_write(MPU_REG_SMPLRT_DIV, 97);
 
     //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
     //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);

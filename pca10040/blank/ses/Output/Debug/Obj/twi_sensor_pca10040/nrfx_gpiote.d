@@ -1,14 +1,11 @@
-Output/Debug/Obj/twi_sensor_pca10040/main.o: \
- C:\SDKs\SDK16\examples\peripheral\twi_sensor\main.c \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stdio.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/__crossworks.h \
- c:\sdks\sdk16\components\boards\boards.h \
- c:\sdks\sdk16\modules\nrfx\hal\nrf_gpio.h \
+Output/Debug/Obj/twi_sensor_pca10040/nrfx_gpiote.o: \
+ C:\SDKs\SDK16\modules\nrfx\drivers\src\nrfx_gpiote.c \
  c:\sdks\sdk16\modules\nrfx\nrfx.h \
  c:\sdks\sdk16\integration\nrfx\nrfx_config.h ../config/sdk_config.h \
  c:\sdks\sdk16\modules\nrfx\drivers\nrfx_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stddef.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/__crossworks.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stdbool.h \
  c:\sdks\sdk16\modules\nrfx\mdk\nrf.h \
  c:\sdks\sdk16\modules\nrfx\mdk\nrf52.h \
@@ -37,6 +34,7 @@ Output/Debug/Obj/twi_sensor_pca10040/main.o: \
  c:\sdks\sdk16\components\libraries\util\app_util_platform.h \
  c:\sdks\sdk16\components\libraries\util\nrf_assert.h \
  c:\sdks\sdk16\components\libraries\util\app_error.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stdio.h \
  c:\sdks\sdk16\components\libraries\util\sdk_errors.h \
  c:\sdks\sdk16\components\drivers_nrf\nrf_soc_nosd\nrf_error.h \
  c:\sdks\sdk16\components\libraries\util\app_error_weak.h \
@@ -45,18 +43,14 @@ Output/Debug/Obj/twi_sensor_pca10040/main.o: \
  c:\sdks\sdk16\components\libraries\util\sdk_errors.h \
  c:\sdks\sdk16\components\libraries\util\sdk_resources.h \
  c:\sdks\sdk16\modules\nrfx\drivers\nrfx_errors.h \
- c:\sdks\sdk16\components\boards\pca10040.h \
- c:\sdks\sdk16\components\libraries\util\app_error.h \
- c:\sdks\sdk16\integration\nrfx\legacy\nrf_drv_twi.h \
- c:\sdks\sdk16\modules\nrfx\drivers\include\nrfx_twim.h \
- c:\sdks\sdk16\modules\nrfx\drivers\include\nrfx_twi_twim.h \
- c:\sdks\sdk16\modules\nrfx\hal\nrf_twim.h \
- c:\sdks\sdk16\modules\nrfx\drivers\include\nrfx_twi.h \
- c:\sdks\sdk16\modules\nrfx\hal\nrf_twi.h \
- c:\sdks\sdk16\components\libraries\delay\nrf_delay.h \
+ c:\sdks\sdk16\modules\nrfx\drivers\include\nrfx_gpiote.h \
+ c:\sdks\sdk16\modules\nrfx\hal\nrf_gpiote.h \
+ c:\sdks\sdk16\modules\nrfx\hal\nrf_gpio.h \
+ c:\sdks\sdk16\components\libraries\util\nrf_bitmask.h \
+ C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/string.h \
+ c:\sdks\sdk16\integration\nrfx\nrfx_log.h \
  c:\sdks\sdk16\components\libraries\log\nrf_log.h \
  c:\sdks\sdk16\components\libraries\util\sdk_common.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/string.h \
  c:\sdks\sdk16\components\libraries\util\sdk_os.h \
  c:\sdks\sdk16\components\libraries\util\app_util.h \
  c:\sdks\sdk16\components\libraries\util\sdk_macros.h \
@@ -65,16 +59,4 @@ Output/Debug/Obj/twi_sensor_pca10040/main.o: \
  c:\sdks\sdk16\components\libraries\log\src\nrf_log_internal.h \
  c:\sdks\sdk16\components\libraries\log\nrf_log_instance.h \
  c:\sdks\sdk16\components\libraries\log\nrf_log_types.h \
- c:\sdks\sdk16\components\libraries\log\nrf_log_types.h \
- c:\sdks\sdk16\components\libraries\log\nrf_log_ctrl.h \
- c:\sdks\sdk16\components\libraries\log\src\nrf_log_ctrl_internal.h \
- c:\sdks\sdk16\components\libraries\log\nrf_log_backend_interface.h \
- c:\sdks\sdk16\components\libraries\memobj\nrf_memobj.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 5.20a/include/stdlib.h \
- c:\sdks\sdk16\components\libraries\balloc\nrf_balloc.h \
- c:\sdks\sdk16\components\libraries\log\nrf_log_default_backends.h \
- ../../../sensor/mpu6050.h ../../../sensor/mpu60x0_register_map.h \
- c:\sdks\sdk16\modules\nrfx\drivers\include\nrfx_gpiote.h \
- c:\sdks\sdk16\modules\nrfx\hal\nrf_gpiote.h \
- c:\sdks\sdk16\modules\nrfx\hal\nrf_gpio.h \
- c:\sdks\sdk16\integration\nrfx\legacy\nrf_drv_gpiote.h
+ c:\sdks\sdk16\components\libraries\log\nrf_log_types.h

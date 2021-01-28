@@ -27,6 +27,7 @@
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;Board Definition"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;nRF_Drivers"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;nRF_Libraries"/>
+  <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;nRF_Log"/>
   <ProjectSessionItem path="twi_sensor_pca10040;twi_sensor_pca10040;Sensor"/>
  </Project>
  <Register1>
@@ -49,9 +50,9 @@
  </TraceWindow>
  <Watch1>
   <Watches active="1" update="Twice a Second">
-   <Watchpoint expression="dev" name="dev" radix="-1" linenumber="85" filename="../../../main.c"/>
-   <Watchpoint expression="er" name="er" radix="16" linenumber="85" filename="../../../main.c"/>
-   <Watchpoint expression="ret" name="ret" radix="16" linenumber="152" filename="../../../sensor/mpu6050.c"/>
+   <Watchpoint expression="dev" name="dev" radix="-1" linenumber="120" filename="../../../main.c"/>
+   <Watchpoint expression="er" name="er" radix="16" linenumber="120" filename="../../../main.c"/>
+   <Watchpoint expression="ret" name="ret" radix="16" linenumber="154" filename="../../../sensor/mpu6050.c"/>
   </Watches>
  </Watch1>
  <Watch2>
@@ -64,11 +65,15 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="22" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor/mpu6050.c" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="59" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/mpu6050.c" selected="0" top="80" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="54" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor/mpu6050.c" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="49" y="127" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../sensor/mpu6050.c" selected="0" top="89" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="83" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor/mpu6050.c" useBinaryEdit="0" left="0" path="../../../sensor/mpu6050.h" selected="0" top="67" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor/mpu6050.c" useBinaryEdit="0" left="0" path="../../../sensor/mpu60x0_register_map.h" selected="0" top="84" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="101" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_weak.c" selected="0" top="88" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="21" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor/mpu6050.c" useBinaryEdit="0" left="0" path="../../../sensor/mpu60x0_register_map.h" selected="0" top="8" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_weak.c" selected="0" top="88" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="17" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="C:/Users/N/AppData/Local/SEGGER/SEGGER Embedded Studio/v3/tools.xml" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="706" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/log/src/nrf_log_frontend.c" selected="0" top="684" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="48" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_handler_gcc.c" selected="0" top="5" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="330" useTextEdit="1" openedFrom="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor/mpu6050.c" useBinaryEdit="0" left="0" path="../../../../../../integration/nrfx/legacy/nrf_drv_twi.h" selected="0" top="312" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="twi_sensor_pca10040" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/SDKs/SDK16/examples/peripheral/twi_sensor/sensor" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="twi_sensor_pca10040" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/SDKs/SDK16/integration/nrfx/legacy" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

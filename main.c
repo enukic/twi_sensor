@@ -14,9 +14,41 @@
 //#include "vl53l1_platform.h"
 #include "mpu6050.h"
 #include "mpu60x0_register_map.h"
+#include "nrfx_gpiote.h"
+#include "nrf_drv_gpiote.h"
 
 #define TOF_SCL_PIN                     NRF_GPIO_PIN_MAP(0,27)    //SCL PIN
 #define TOF_SDA_PIN                     NRF_GPIO_PIN_MAP(0,26)    //SDA PIN
+#define TOF_INT_PIN                     NRF_GPIO_PIN_MAP(0,31)     //INT PIN
+
+void in_event_handler(nrfx_gpiote_pin_t pin, nrf_gpiote_polarity_t action);
+nrfx_gpiote_in_config_t config = NRFX_GPIOTE_CONFIG_IN_SENSE_HITOLO(false);
+
+void gpiote_init(void)
+{
+    nrfx_gpiote_init();
+    nrfx_gpiote_in_init(TOF_INT_PIN, &config, in_event_handler);
+    nrfx_gpiote_in_event_enable(TOF_INT_PIN, true);
+}
+
+void in_event_handler(nrfx_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
+{
+    //app_sched_event_put(NULL, 0, s_in_evt_handler);
+    uint8_t read_x, read_y;
+    mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+    mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+    int16_t tmpx = ((int16_t)read_x << 8) | read_y;
+    tmpx+=120;
+    mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+    mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+    int16_t tmpy = ((int16_t)read_x << 8) | read_y;
+    tmpy -=2050;
+    mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+    mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+    int16_t tmpz = ((int16_t)read_x << 8) | read_y;
+
+    NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
+}
 
 
 int main(void)
@@ -27,6 +59,8 @@ int main(void)
 
     NRF_LOG_INFO("\r\nTWI sensor example started.");
     NRF_LOG_FLUSH();
+
+    //gpiote_init();
     twi_init(TOF_SCL_PIN, TOF_SDA_PIN);
     
     uint8_t d_add = 0x68U;
@@ -35,28 +69,29 @@ int main(void)
 
     NRF_LOG_INFO("\r\nTWI sensor example init.");
     NRF_LOG_FLUSH();
+    gpiote_init();
 
 
 
     uint32_t ret;
     while (true)
     {
-        nrf_delay_ms(200);
+        //nrf_delay_ms(200);
 
-        uint8_t read_x, read_y;
-        mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-        mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-        int16_t tmpx = ((int16_t)read_x << 8) | read_y;
-        tmpx+=120;
-        mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-        mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
-        int16_t tmpy = ((int16_t)read_x << 8) | read_y;
-        tmpy -=2050;
-        mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-        mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
-        int16_t tmpz = ((int16_t)read_x << 8) | read_y;
+        //uint8_t read_x, read_y;
+        //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+        //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+        //int16_t tmpx = ((int16_t)read_x << 8) | read_y;
+        //tmpx+=120;
+        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+        //int16_t tmpy = ((int16_t)read_x << 8) | read_y;
+        //tmpy -=2050;
+        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+        //int16_t tmpz = ((int16_t)read_x << 8) | read_y;
 
-        NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
+        //NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
 
         
         NRF_LOG_FLUSH();
