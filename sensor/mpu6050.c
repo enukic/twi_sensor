@@ -94,7 +94,7 @@ bool mpu6050_init(uint8_t device_address)
     uint8_t reset_value = 0x04U | 0x02U | 0x01U; // Resets gyro, accelerometer and temperature sensor signal paths.
     transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 128);
     transfer_succeeded &= mpu6050_register_write(ADDRESS_SIGNAL_PATH_RESET, 7);
-    transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 1);
+    transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 5);
     //transfer_succeeded &= mpu6050_register_write(MPU_REG_GYRO_CONFIG, (24 | 128));
 
     //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (24 | 32));
@@ -111,53 +111,26 @@ bool mpu6050_verify_product_id(void)
 {
     uint8_t who_am_i;
 
-
-    //uint8_t read_x, read_y;
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-    //int16_t tmpx = ((int16_t)read_x << 8) | read_y;
-    //NRF_LOG_INFO("Before: %d",tmpx);
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-    //tmpx = ((int16_t)read_x << 8) | read_y;
-    //NRF_LOG_INFO("Before: %d",tmpx);
-
-    //mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (1<<5));
     mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (3<<3));
-    mpu6050_register_write(MPU_REG_INT_ENABLE, 1);
-    mpu6050_register_write(MPU_REG_SMPLRT_DIV, 97);
+    mpu6050_register_write(MPU_REG_GYRO_CONFIG, (3<<3));
+    //mpu6050_register_write(MPU_REG_INT_ENABLE, 1);
+    //mpu6050_register_write(MPU_REG_SMPLRT_DIV, 255);
 
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-    //tmpx = ((int16_t)read_x << 8) | read_y;
-    //NRF_LOG_INFO("After: %d",tmpx);
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-    //tmpx = ((int16_t)read_x << 8) | read_y;
-    //NRF_LOG_INFO("After: %d",tmpx);
-
-    //    NRF_LOG_FLUSH();
 
 
     if (mpu6050_register_read(ADDRESS_WHO_AM_I, &who_am_i, 1))
     {
         if (who_am_i != expected_who_am_i)
         {
-            NRF_LOG_INFO("\r\n%x",who_am_i);
-            NRF_LOG_FLUSH();
             return false;
         }
         else
         {
-            NRF_LOG_INFO("\r\n%x",who_am_i);
-            NRF_LOG_FLUSH();
             return true;
         }
     }
     else
     {
-        NRF_LOG_INFO("\r\n%x",who_am_i);
-        NRF_LOG_FLUSH();
         return false;
     }
     
@@ -169,22 +142,15 @@ bool mpu6050_register_write(uint8_t register_address, uint8_t value)
 
     w2_data[0] = register_address;
     w2_data[1] = value;
-    //return twi_master_transfer(m_device_address, w2_data, 2, TWI_ISSUE_STOP);
     uint32_t ret;
 
     ret = nrf_drv_twi_tx(&m_twi, MPU_ADDRESS, w2_data,2, false);
     APP_ERROR_CHECK(ret);
-    NRF_LOG_INFO("\r\nTWI WRITE");
-    NRF_LOG_FLUSH();
     return ret;
 }
 
 bool mpu6050_register_read(uint8_t register_address, uint8_t *destination, uint8_t number_of_bytes)
 {
-    //bool transfer_succeeded;
-    //transfer_succeeded  = twi_master_transfer(m_device_address, &register_address, 1, TWI_DONT_ISSUE_STOP);
-    //transfer_succeeded &= twi_master_transfer(m_device_address|TWI_READ_BIT, destination, number_of_bytes, TWI_ISSUE_STOP);
-    //return transfer_succeeded;
     uint32_t ret;
     ret = nrf_drv_twi_tx(&m_twi, MPU_ADDRESS, &register_address, 1, false);
     APP_ERROR_CHECK(ret);

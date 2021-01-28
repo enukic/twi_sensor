@@ -34,20 +34,34 @@ void gpiote_init(void)
 void in_event_handler(nrfx_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 {
     //app_sched_event_put(NULL, 0, s_in_evt_handler);
-    uint8_t read_x, read_y;
-    mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-    mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-    int16_t tmpx = ((int16_t)read_x << 8) | read_y;
-    tmpx+=120;
-    mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-    mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
-    int16_t tmpy = ((int16_t)read_x << 8) | read_y;
-    tmpy -=2050;
-    mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-    mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
-    int16_t tmpz = ((int16_t)read_x << 8) | read_y;
+    //uint8_t read_x, read_y;
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+    //int16_t tmpx = ((int16_t)read_x << 8) | read_y;
+    //tmpx+=120;
+    //mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+    //int16_t tmpy = ((int16_t)read_x << 8) | read_y;
+    //tmpy -=2050;
+    //mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+    //int16_t tmpz = ((int16_t)read_x << 8) | read_y;
 
-    NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
+    //NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
+    
+    //mpu6050_register_read(MPU_REG_GYRO_XOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_GYRO_XOUT_L,&read_y,2);
+    //tmpx = ((int16_t)read_x << 8) | read_y;
+    //tmpx+=120;
+    //mpu6050_register_read(MPU_REG_GYRO_YOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_GYRO_YOUT_L,&read_y,2);
+    //tmpy = ((int16_t)read_x << 8) | read_y;
+    //tmpy -=2050;
+    //mpu6050_register_read(MPU_REG_GYRO_YOUT_H,&read_x,2);
+    //mpu6050_register_read(MPU_REG_GYRO_YOUT_L,&read_y,2);
+    //tmpz = ((int16_t)read_x << 8) | read_y;
+
+    //NRF_LOG_INFO("GYRO - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
 }
 
 
@@ -69,36 +83,44 @@ int main(void)
 
     NRF_LOG_INFO("\r\nTWI sensor example init.");
     NRF_LOG_FLUSH();
-    gpiote_init();
-
+    //gpiote_init();
 
 
     uint32_t ret;
     while (true)
     {
-        //nrf_delay_ms(200);
-
-        //uint8_t read_x, read_y;
-        //mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-        //mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
-        //int16_t tmpx = ((int16_t)read_x << 8) | read_y;
-        //tmpx+=120;
-        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
-        //int16_t tmpy = ((int16_t)read_x << 8) | read_y;
-        //tmpy -=2050;
-        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-        //mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
-        //int16_t tmpz = ((int16_t)read_x << 8) | read_y;
+        nrf_delay_ms(200);
+        uint8_t read_x, read_y;
+        mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+        int16_t tmpx = ((int16_t)read_x << 8) | read_y;
+        tmpx+=120;
+        mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+        int16_t tmpy = ((int16_t)read_x << 8) | read_y;
+        tmpy -=2050;
+        mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+        int16_t tmpz = ((int16_t)read_x << 8) | read_y;
 
         //NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
+    
+        mpu6050_register_read(MPU_REG_GYRO_XOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_GYRO_XOUT_L,&read_y,2);
+        tmpx = ((int16_t)read_x << 8) | read_y;
+        tmpx+=45;
+        mpu6050_register_read(MPU_REG_GYRO_YOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_GYRO_YOUT_L,&read_y,2);
+        tmpy = ((int16_t)read_x << 8) | read_y;
+        tmpy -=245;
+        mpu6050_register_read(MPU_REG_GYRO_YOUT_H,&read_x,2);
+        mpu6050_register_read(MPU_REG_GYRO_YOUT_L,&read_y,2);
+        tmpz = ((int16_t)read_x << 8) | read_y;
+        tmpz -=243;
 
-        
+        NRF_LOG_INFO("GYRO - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
+
         NRF_LOG_FLUSH();
-
-
-
-
     }
 }
 
