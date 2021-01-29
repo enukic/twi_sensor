@@ -14,6 +14,13 @@
 #define MPU60x0_REG_MAP_H
 
 
+#define MPU6050_REG_ACCEL_XOFFS_H     0x06
+#define MPU6050_REG_ACCEL_XOFFS_L     0x07
+#define MPU6050_REG_ACCEL_YOFFS_H     0x08
+#define MPU6050_REG_ACCEL_YOFFS_L     0x09
+#define MPU6050_REG_ACCEL_ZOFFS_H     0x0A
+#define MPU6050_REG_ACCEL_ZOFFS_L     0x0B
+
 #define MPU_REG_SELF_TEST_X        0x0D // Dec 13,  R/W,  XA_TEST[4-2] XG_TEST[4-0]
 #define MPU_REG_SELF_TEST_Y        0x0E // Dec 14,  R/W,  YA_TEST[4-2] YG_TEST[4-0]
 #define MPU_REG_SELF_TEST_Z        0x0F // Dec 15,  R/W,  ZA_TEST[4-2] ZG_TEST[4-0]

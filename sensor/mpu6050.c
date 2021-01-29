@@ -92,17 +92,27 @@ bool mpu6050_init(uint8_t device_address)
 
     // Do a reset on signal paths
     uint8_t reset_value = 0x04U | 0x02U | 0x01U; // Resets gyro, accelerometer and temperature sensor signal paths.
-    transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 128);
-    transfer_succeeded &= mpu6050_register_write(ADDRESS_SIGNAL_PATH_RESET, 7);
-    transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 5);
+    //transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 128);
+    //transfer_succeeded &= mpu6050_register_write(ADDRESS_SIGNAL_PATH_RESET, 7);
+    transfer_succeeded &= mpu6050_register_write(MPU_REG_PWR_MGMT_1, 0x00);
     //transfer_succeeded &= mpu6050_register_write(MPU_REG_GYRO_CONFIG, (24 | 128));
 
     //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (24 | 32));
     //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, 64);
     //transfer_succeeded &= mpu6050_register_write(MPU_REG_ACCEL_CONFIG, 128);
+    //transfer_succeeded &= mpu6050_register_write(MPU6050_REG_ACCEL_XOFFS_H, 0x00);
+    //transfer_succeeded &= mpu6050_register_write(MPU6050_REG_ACCEL_XOFFS_L, 0x00);
+    //transfer_succeeded &= mpu6050_register_write(MPU6050_REG_ACCEL_YOFFS_H, 0x00);
+    //transfer_succeeded &= mpu6050_register_write(MPU6050_REG_ACCEL_YOFFS_L, 0x00);
+    //transfer_succeeded &= mpu6050_register_write(MPU6050_REG_ACCEL_ZOFFS_H, 0x00);
+    //transfer_succeeded &= mpu6050_register_write(MPU6050_REG_ACCEL_ZOFFS_L, 0x00);
+    //uint32_t ret;
+    //uint8_t dat[7] = {MPU6050_REG_ACCEL_XOFFS_H,0x00,0x00,0x00,0x00,0x00,0x00};
+    //ret = nrf_drv_twi_tx(&m_twi, MPU_ADDRESS, &dat[0],7, false);
+    //APP_ERROR_CHECK(ret);
 
     // Read and verify product ID
-    transfer_succeeded &= mpu6050_verify_product_id();
+    //transfer_succeeded &= mpu6050_verify_product_id();
 
     return transfer_succeeded;
 }
@@ -111,8 +121,8 @@ bool mpu6050_verify_product_id(void)
 {
     uint8_t who_am_i;
 
-    mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (3<<3));
-    mpu6050_register_write(MPU_REG_GYRO_CONFIG, (3<<3));
+    //mpu6050_register_write(MPU_REG_ACCEL_CONFIG, (3<<3));
+    //mpu6050_register_write(MPU_REG_GYRO_CONFIG, (3<<3));
     //mpu6050_register_write(MPU_REG_INT_ENABLE, 1);
     //mpu6050_register_write(MPU_REG_SMPLRT_DIV, 255);
 
