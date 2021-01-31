@@ -91,37 +91,37 @@ int main(void)
     {
         nrf_delay_ms(500);
         uint8_t read_x, read_y;
-        mpu6050_register_read(MPU6050_REG_ACCEL_XOFFS_H,&read_x,2);
-        mpu6050_register_read(MPU6050_REG_ACCEL_XOFFS_L,&read_y,2);
+        mpu6050_register_read(MPU6050_REG_ACCEL_XOFFS_H,&read_x,1);
+        mpu6050_register_read(MPU6050_REG_ACCEL_XOFFS_L,&read_y,1);
         int16_t tmpx = ((int16_t)read_x << 8) | read_y;
 
-        mpu6050_register_read(MPU6050_REG_ACCEL_YOFFS_H,&read_x,2);
-        mpu6050_register_read(MPU6050_REG_ACCEL_YOFFS_L,&read_y,2);
+        mpu6050_register_read(MPU6050_REG_ACCEL_YOFFS_H,&read_x,1);
+        mpu6050_register_read(MPU6050_REG_ACCEL_YOFFS_L,&read_y,1);
         int16_t tmpy = ((int16_t)read_x << 8) | read_y;
 
-        mpu6050_register_read(MPU6050_REG_ACCEL_ZOFFS_H,&read_x,2);
-        mpu6050_register_read(MPU6050_REG_ACCEL_ZOFFS_L,&read_y,2);
+        mpu6050_register_read(MPU6050_REG_ACCEL_ZOFFS_H,&read_x,1);
+        mpu6050_register_read(MPU6050_REG_ACCEL_ZOFFS_L,&read_y,1);
         int16_t tmpz = ((int16_t)read_x << 8) | read_y;
 
         NRF_LOG_INFO("OFFS - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
 
-        mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,2);
-        mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,2);
+        mpu6050_register_read(MPU_REG_ACCEL_XOUT_H,&read_x,1);
+        mpu6050_register_read(MPU_REG_ACCEL_XOUT_L,&read_y,1);
         tmpx = ((int16_t)read_x << 8) | read_y;
 
-        mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,2);
-        mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,2);
+        mpu6050_register_read(MPU_REG_ACCEL_YOUT_H,&read_x,1);
+        mpu6050_register_read(MPU_REG_ACCEL_YOUT_L,&read_y,1);
         tmpy = ((int16_t)read_x << 8) | read_y;
 
-        mpu6050_register_read(MPU_REG_ACCEL_ZOUT_H,&read_x,2);
-        mpu6050_register_read(MPU_REG_ACCEL_ZOUT_L,&read_y,2);
+        mpu6050_register_read(MPU_REG_ACCEL_ZOUT_H,&read_x,1);
+        mpu6050_register_read(MPU_REG_ACCEL_ZOUT_L,&read_y,1);
         tmpz = ((int16_t)read_x << 8) | read_y;
 
         NRF_LOG_INFO("ACEL - X:%d Y:%d Z:%d",tmpx,tmpy,tmpz);
 
-        //mpu6050_register_write(MPU6050_REG_ACCEL_XOFFS_H, 0x00);
+        //mpu6050_register_write(MPU6050_REG_ACCEL_XOFFS_H, 0x81);
         //mpu6050_register_write(MPU6050_REG_ACCEL_XOFFS_L, 0x00);
-        //mpu6050_register_write(MPU6050_REG_ACCEL_YOFFS_H, 0xF5);
+        //mpu6050_register_write(MPU6050_REG_ACCEL_YOFFS_H, 0x00);
         //mpu6050_register_write(MPU6050_REG_ACCEL_YOFFS_L, 0x00);
         //mpu6050_register_write(MPU6050_REG_ACCEL_ZOFFS_H, 0x00);
         //mpu6050_register_write(MPU6050_REG_ACCEL_ZOFFS_L, 0x00);
