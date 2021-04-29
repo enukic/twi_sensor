@@ -34,7 +34,7 @@
 "Output/Debug/Obj/twi_sensor_pca10040/ses_startup_nrf52.o"
 "Output/Debug/Obj/twi_sensor_pca10040/ses_startup_nrf_common.o"
 "Output/Debug/Obj/twi_sensor_pca10040/system_nrf52.o"
-"Output/Debug/Obj/twi_sensor_pca10040/mpu6050.o"
+"Output/Debug/Obj/twi_sensor_pca10040/bno055.o"
 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.20a/lib/libm_v7em_fpv4_sp_d16_hard_t_le_eabi.a"
 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.20a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi.a"
 "C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 5.20a/lib/libdebugio_v7em_fpv4_sp_d16_hard_t_le_eabi.a"

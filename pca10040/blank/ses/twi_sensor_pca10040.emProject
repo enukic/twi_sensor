@@ -86,7 +86,7 @@
       <file file_name="../../../../../../modules/nrfx/mdk/system_nrf52.c" />
     </folder>
     <folder Name="Sensor">
-      <file file_name="../../../sensor/mpu6050.c" />
+      <file file_name="../../../sensor/bno055.c" />
     </folder>
   </project>
   <configuration
